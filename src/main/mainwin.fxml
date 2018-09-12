@@ -46,7 +46,7 @@
                 </Menu>
                 <Menu fx:id="mEdit" mnemonicParsing="false" text="Edit">
                   <items>
-                        <MenuItem fx:id="miUndo" mnemonicParsing="false" text="Undo                              Ctrl+Z" />
+                        <MenuItem fx:id="miUndo" mnemonicParsing="false" onAction="#doUndo" text="Undo                              Ctrl+Z" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="miCut" mnemonicParsing="false" text="Cut                                 Ctrl+X" />
                         <MenuItem fx:id="miCopy" mnemonicParsing="false" text="Copy                              Ctrl+C" />
@@ -72,6 +72,11 @@
                     <items>
                         <MenuItem fx:id="miGetHelp" mnemonicParsing="false" text="Get Help" />
                       <MenuItem fx:id="miAboutUs" mnemonicParsing="false" text="About Us" />
+                    </items>
+                  </Menu>
+                  <Menu fx:id="mSetting" mnemonicParsing="false" text="Setting">
+                    <items>
+                      <MenuItem fx:id="miPreferences" mnemonicParsing="false" text="Preferences..." />
                     </items>
                   </Menu>
               </menus>

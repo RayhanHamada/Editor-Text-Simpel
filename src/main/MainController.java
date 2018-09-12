@@ -33,6 +33,7 @@ public class MainController implements Initializable {
 	@FXML private Menu mFormat;
 	@FXML private Menu mView;
 	@FXML private Menu mHelp;
+	@FXML private Menu mSetting;
 	
 	// for mFile Menu
 	@FXML private MenuItem miNew;
@@ -57,10 +58,12 @@ public class MainController implements Initializable {
 	//for miView Menu
 	@FXML private RadioMenuItem miStatusBar;
 	
-	//for mHelp
+	//for mHelp Menu
 	@FXML private MenuItem miGetHelp;
 	@FXML private MenuItem miAboutUs;
 	
+	//for mSetting Menu
+	@FXML private MenuItem miPreferences;
 	
 	//for TextArea
 	@FXML private TextArea ta;
@@ -70,8 +73,11 @@ public class MainController implements Initializable {
 	private File currentFile = null;
 	private boolean isFileOpened = false;
 	
+	private String previousText = "";
+	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lblFilename.setText("untitled");
+
 	}
 	
 	@FXML public void doNew()
@@ -81,6 +87,7 @@ public class MainController implements Initializable {
 			if (ta.getText().trim().equals(""))
 			{
 				lblFilename.setText("untitled");
+				previousText = "";
 			}
 			else
 			{
@@ -91,7 +98,9 @@ public class MainController implements Initializable {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK){
 				    doSaveAs();
-				} else {
+				} 
+				else 
+				{
 				   ta.setText("");
 				}
 			}
@@ -105,11 +114,13 @@ public class MainController implements Initializable {
 				alert.setHeaderText("Save ?");
 				alert.setContentText("Do you want to save this modified text file ?");
 				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK){
+				
+				if (result.get() == ButtonType.OK)
+				{
 				    doSave();
 				}
 				else {
-				   
+				   ;
 				}
 			}
 			else
@@ -130,8 +141,7 @@ public class MainController implements Initializable {
 			
 			while ((filetext = brf.readLine()) != null || (text = brt.readLine()) != null)
 			{
-				if (filetext != text)
-					modified = true;
+				if (filetext != text) modified = true;
 			}
 			brf.close();
 			brt.close();
@@ -148,7 +158,7 @@ public class MainController implements Initializable {
 		fc.getExtensionFilters().add(extFilter);
 		currentFile = fc.showOpenDialog(null);
 		
-		if (currentFile != null) {
+		if (!isFileOpened) {
 			try {
 				byte[] fileBytes = Files.readAllBytes(currentFile.toPath());
 				char singleChar;
@@ -164,8 +174,21 @@ public class MainController implements Initializable {
 		}
 		else
 		{
-			
+			ta.setText("");
+			try {
+				byte[] fileBytes = Files.readAllBytes(currentFile.toPath());
+				char singleChar;
+				for (byte b : fileBytes) {
+					singleChar = (char) b;
+					ta.setText(ta.getText() + singleChar);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			lblFilename.setText(currentFile.getName());
+			isFileOpened = true;
 		}
+		previousText = ta.getText();
 	}
 	
 	@FXML public void doSave()
@@ -191,7 +214,7 @@ public class MainController implements Initializable {
 		currentFile = null;
 		ta.setText("");
 		lblFilename.setText("untitled");
-		isFileOpened = true;
+		isFileOpened = false;
 	}
 	
 	@FXML public void doSaveAs()
@@ -217,4 +240,14 @@ public class MainController implements Initializable {
 	{
 		System.exit(0);
 	}
+	
+	// for edit menu
+	
+	@FXML public void doUndo()
+	{
+		String tempText = ta.getText();
+		ta.setText(previousText);
+		previousText = tempText;
+	}
+	
 }
