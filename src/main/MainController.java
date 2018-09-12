@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 	@FXML private Label lblStatusBar;
 	
 	private File currentFile = null;
-	private boolean isOpeningFile = false;
+	private boolean isFileOpened = false;
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lblFilename.setText("untitled");
@@ -76,7 +76,7 @@ public class MainController implements Initializable {
 	
 	@FXML public void doNew()
 	{
-		if (!isOpeningFile)
+		if (!isFileOpened)
 		{
 			if (ta.getText().trim().equals(""))
 			{
@@ -88,7 +88,6 @@ public class MainController implements Initializable {
 				alert.setTitle("Hamada Text Editor");
 				alert.setHeaderText("Save ?");
 				alert.setContentText("Do you want to save current text ?");
-
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK){
 				    doSaveAs();
@@ -102,7 +101,6 @@ public class MainController implements Initializable {
 			if (isContentModified(currentFile, ta.getText()))
 			{
 				Alert alert = new Alert(AlertType.CONFIRMATION);
-//				alert.getButtonTypes().addAll(btnOk, btnNo, btnCancel);
 				alert.setTitle("Hamada Text Editor");
 				alert.setHeaderText("Save ?");
 				alert.setContentText("Do you want to save this modified text file ?");
@@ -111,7 +109,7 @@ public class MainController implements Initializable {
 				    doSave();
 				}
 				else {
-				   System.out.println("error");
+				   
 				}
 			}
 			else
@@ -119,7 +117,6 @@ public class MainController implements Initializable {
 				ta.setText("");
 				lblFilename.setText("untitled");
 			}
-			
 		}
 	}
 	
@@ -133,10 +130,8 @@ public class MainController implements Initializable {
 			
 			while ((filetext = brf.readLine()) != null || (text = brt.readLine()) != null)
 			{
-				if ((text = brt.readLine()) != null)
-					if (!filetext.equals(text))
-						modified = true;
-//				System.out.println("hello");
+				if (filetext != text)
+					modified = true;
 			}
 			brf.close();
 			brt.close();
@@ -165,7 +160,7 @@ public class MainController implements Initializable {
 				e.printStackTrace();
 			}
 			lblFilename.setText(currentFile.getName());
-			isOpeningFile = true;
+			isFileOpened = true;
 		}
 		else
 		{
@@ -175,7 +170,6 @@ public class MainController implements Initializable {
 	
 	@FXML public void doSave()
 	{
-		
 		if (currentFile != null) 
 		{
 			try {
@@ -197,6 +191,7 @@ public class MainController implements Initializable {
 		currentFile = null;
 		ta.setText("");
 		lblFilename.setText("untitled");
+		isFileOpened = true;
 	}
 	
 	@FXML public void doSaveAs()
@@ -214,7 +209,7 @@ public class MainController implements Initializable {
 				fileWriter.close();
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 	}
 	
