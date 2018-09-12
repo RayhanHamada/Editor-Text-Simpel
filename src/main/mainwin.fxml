@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+   <center>
+      <TextArea fx:id="ta" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <HBox prefHeight="20.0" prefWidth="802.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblStatusBar" prefHeight="17.0" prefWidth="227.0" text="Label">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <HBox prefHeight="25.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="mb" prefHeight="25.0" prefWidth="338.0">
+              <menus>
+                <Menu fx:id="mFile" mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem fx:id="miNew" mnemonicParsing="false" onAction="#doNew" text="New                                Ctrl+n" />
+                        <MenuItem fx:id="miOpen" mnemonicParsing="false" onAction="#doOpen" text="Open                               Ctrl+o" />
+                        <SeparatorMenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="miSave" mnemonicParsing="false" onAction="#doSave" text="Save                               Ctrl+s" />
+                        <MenuItem fx:id="miSaveAs" mnemonicParsing="false" onAction="#doSaveAs" text="Save As" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="miClose" mnemonicParsing="false" onAction="#doClose" text="Close" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="miExit" mnemonicParsing="false" onAction="#doExit" text="Exit" />
+                  </items>
+                </Menu>
+                <Menu fx:id="mEdit" mnemonicParsing="false" text="Edit">
+                  <items>
+                        <MenuItem fx:id="miUndo" mnemonicParsing="false" text="Undo                              Ctrl+Z" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="miCut" mnemonicParsing="false" text="Cut                                 Ctrl+X" />
+                        <MenuItem fx:id="miCopy" mnemonicParsing="false" text="Copy                              Ctrl+C" />
+                        <MenuItem fx:id="miPaste" mnemonicParsing="false" text="Paste                              Ctrl+V" />
+                    <MenuItem fx:id="miDelete" mnemonicParsing="false" text="Delete                            Del" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="miFindAndReplace" mnemonicParsing="false" text="Find and Replace           Ctrl+F" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="miSelectAll" mnemonicParsing="false" text="Select All                        Ctrl+A" />
+                  </items>
+                </Menu>
+                  <Menu fx:id="mFormat" mnemonicParsing="false" text="Format">
+                    <items>
+                        <RadioMenuItem fx:id="miWrapText" mnemonicParsing="false" text="Wrap Text" />
+                    </items>
+                  </Menu>
+                <Menu fx:id="mView" mnemonicParsing="false" text="View">
+                     <items>
+                        <RadioMenuItem fx:id="miStatusBar" mnemonicParsing="false" text="Status Bar" />
+                     </items>
+                </Menu>
+                  <Menu fx:id="mHelp" mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="miGetHelp" mnemonicParsing="false" text="Get Help" />
+                      <MenuItem fx:id="miAboutUs" mnemonicParsing="false" text="About Us" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <Label fx:id="lblFilename" prefHeight="25.0" prefWidth="163.0" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
