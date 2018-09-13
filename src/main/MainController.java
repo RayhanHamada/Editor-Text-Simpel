@@ -1,5 +1,11 @@
 package main;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,6 +15,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,10 +31,11 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter; 
 
-public class MainController implements Initializable {
+public class MainController implements Initializable, ClipboardOwner {
 
 	@FXML private MenuBar mb;
 	
+	//
 	@FXML private Menu mFile;
 	@FXML private Menu mEdit;
 	@FXML private Menu mFormat;
@@ -35,7 +43,7 @@ public class MainController implements Initializable {
 	@FXML private Menu mHelp;
 	@FXML private Menu mSetting;
 	
-	// for mFile Menu
+	//for mFile Menu
 	@FXML private MenuItem miNew;
 	@FXML private MenuItem miOpen;
 	@FXML private MenuItem miSave;
@@ -43,7 +51,7 @@ public class MainController implements Initializable {
 	@FXML private MenuItem miClose;
 	@FXML private MenuItem miExit;
 	
-	// for mEdit Menu
+	//for mEdit Menu
 	@FXML private MenuItem miUndo;
 	@FXML private MenuItem miCut;
 	@FXML private MenuItem miCopy;
@@ -72,12 +80,17 @@ public class MainController implements Initializable {
 	
 	private File currentFile = null;
 	private boolean isFileOpened = false;
-	
 	private String previousText = "";
 	
+	// initializable implemented method
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lblFilename.setText("untitled");
 
+	}
+	
+	// ClipboardOwner implemented method
+	public void lostOwnership(Clipboard arg0, Transferable arg1) {
+		
 	}
 	
 	@FXML public void doNew()
@@ -250,4 +263,48 @@ public class MainController implements Initializable {
 		previousText = tempText;
 	}
 	
+	@FXML public void doCut()
+	{
+		
+	}
+	
+	@FXML public void doCopy()
+	{
+		StringSelection stringSelection = new StringSelection(ta.getSelectedText());
+	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	    clipboard.setContents(stringSelection, this);
+	}
+	
+	@FXML public void doPaste()
+	{
+		String result = "";
+	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	    Transferable contents = clipboard.getContents(null);
+	    boolean hasTransferableText = (contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
+	    if (hasTransferableText) {
+	      try {
+	        result = (String)contents.getTransferData(DataFlavor.stringFlavor);
+	      }
+	      catch (Exception e){
+	        e.printStackTrace();
+	      }
+	    }
+	    System.out.println(result);
+	}
+	
+	@FXML public void doDelete()
+	{
+		
+	}
+	
+	@FXML public void doFandR()
+	{
+		
+	}
+	
+	@FXML public void doSelectAll()
+	{
+		
+	}
+
 }

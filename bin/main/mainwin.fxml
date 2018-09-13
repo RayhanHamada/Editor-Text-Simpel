@@ -48,14 +48,14 @@
                   <items>
                         <MenuItem fx:id="miUndo" mnemonicParsing="false" onAction="#doUndo" text="Undo                              Ctrl+Z" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miCut" mnemonicParsing="false" text="Cut                                 Ctrl+X" />
-                        <MenuItem fx:id="miCopy" mnemonicParsing="false" text="Copy                              Ctrl+C" />
-                        <MenuItem fx:id="miPaste" mnemonicParsing="false" text="Paste                              Ctrl+V" />
-                    <MenuItem fx:id="miDelete" mnemonicParsing="false" text="Delete                            Del" />
+                        <MenuItem fx:id="miCut" mnemonicParsing="false" onAction="#doCut" text="Cut                                 Ctrl+X" />
+                        <MenuItem fx:id="miCopy" mnemonicParsing="false" onAction="#doCopy" text="Copy                              Ctrl+C" />
+                        <MenuItem fx:id="miPaste" mnemonicParsing="false" onAction="#doPaste" text="Paste                              Ctrl+V" />
+                    <MenuItem fx:id="miDelete" mnemonicParsing="false" onAction="#doDelete" text="Delete                            Del" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miFindAndReplace" mnemonicParsing="false" text="Find and Replace           Ctrl+F" />
+                        <MenuItem fx:id="miFindAndReplace" mnemonicParsing="false" onAction="#doFandR" text="Find and Replace           Ctrl+F" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="miSelectAll" mnemonicParsing="false" text="Select All                        Ctrl+A" />
+                        <MenuItem fx:id="miSelectAll" mnemonicParsing="false" onAction="#doSelectAll" text="Select All                        Ctrl+A" />
                   </items>
                 </Menu>
                   <Menu fx:id="mFormat" mnemonicParsing="false" text="Format">
