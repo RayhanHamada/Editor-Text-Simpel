@@ -10,15 +10,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -29,13 +32,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter; 
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage; 
 
-public class MainController implements Initializable, ClipboardOwner {
+public class MainController implements Initializable, ClipboardOwner 
+{
 
 	@FXML private MenuBar mb;
 	
-	//
+	//for mb MenuBar
 	@FXML private Menu mFile;
 	@FXML private Menu mEdit;
 	@FXML private Menu mFormat;
@@ -87,10 +92,9 @@ public class MainController implements Initializable, ClipboardOwner {
 		lblFilename.setText("untitled");
 
 	}
-	
 	// ClipboardOwner implemented method
 	public void lostOwnership(Clipboard arg0, Transferable arg1) {
-		
+		//gk ngapa-ngapain
 	}
 	
 	@FXML public void doNew()
@@ -213,6 +217,7 @@ public class MainController implements Initializable, ClipboardOwner {
 				fileWriter.write(ta.getText());
 				fileWriter.flush();
 				fileWriter.close();
+				previousText = ta.getText();
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
@@ -243,6 +248,7 @@ public class MainController implements Initializable, ClipboardOwner {
 				fileWriter.write(text);
 				fileWriter.flush();
 				fileWriter.close();
+				previousText = ta.getText();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -265,7 +271,16 @@ public class MainController implements Initializable, ClipboardOwner {
 	
 	@FXML public void doCut()
 	{
-		
+		StringSelection stringSelection = new StringSelection(ta.getSelectedText());
+	    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	    clipboard.setContents(stringSelection, this);
+	    
+	    int start = Integer.valueOf(ta.getSelection().toString().split(", ")[0]);
+	    int end = Integer.valueOf(ta.getSelection().toString().split(", ")[1]);
+	    
+	    StringBuffer buffer = new StringBuffer(ta.getText());
+	    ta.setText(buffer.replace(start, end, "").toString());
+	    
 	}
 	
 	@FXML public void doCopy()
@@ -294,17 +309,38 @@ public class MainController implements Initializable, ClipboardOwner {
 	
 	@FXML public void doDelete()
 	{
-		
+		StringBuffer buffer = new StringBuffer(ta.getText());
+		int start = Integer.valueOf(ta.getSelection().toString().split(", ")[0]);
+		int end = Integer.valueOf(ta.getSelection().toString().split(", ")[1]);
+		ta.setText(buffer.replace(start, end, "").toString());
 	}
 	
 	@FXML public void doFandR()
 	{
-		
+		try {
+			Parent fr = FXMLLoader.load(getClass().getResource("/main/findreplace.fxml"));
+			Scene scene = new Scene(fr);
+			Stage sfr = new Stage();
+			sfr.setScene(scene);
+			sfr.setTitle("Find and Replace");
+			sfr.setResizable(false);
+			sfr.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML public void doSelectAll()
 	{
+		ta.selectAll();
+	}
+	
+	//for Format Menu
+	
+	@FXML public void doWrapText()
+	{
 		
 	}
 
+	
 }
