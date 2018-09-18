@@ -335,7 +335,7 @@ public class MainController implements Initializable, ClipboardOwner
 		ta.selectAll();
 	}
 	
-	//for Format Menu
+	//for Format Menu a
 	
 	@FXML public void doWrapText()
 	{

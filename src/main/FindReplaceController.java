@@ -32,7 +32,7 @@ public class FindReplaceController implements Initializable
 	private ToggleGroup tg;
 	
 	
-	
+	//for change
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tg = new ToggleGroup();
 		rbForward.setToggleGroup(tg);

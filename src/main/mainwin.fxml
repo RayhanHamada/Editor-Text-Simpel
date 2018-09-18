@@ -18,7 +18,7 @@
    <bottom>
       <HBox prefHeight="20.0" prefWidth="802.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblStatusBar" prefHeight="17.0" prefWidth="227.0" text="Label">
+            <Label fx:id="lblStatusBar" prefHeight="17.0" prefWidth="227.0" text="Status Bar">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
