@@ -304,7 +304,6 @@ public class MainController implements Initializable, ClipboardOwner
 	        e.printStackTrace();
 	      }
 	    }
-	    System.out.println(result);
 	}
 	
 	@FXML public void doDelete()
@@ -335,12 +334,21 @@ public class MainController implements Initializable, ClipboardOwner
 		ta.selectAll();
 	}
 	
-	//for Format Menu a
-	
-	@FXML public void doWrapText()
+	//for Format Menu
+	@FXML public void toggleWrapText()
 	{
-		
+		ta.setWrapText(false);
+		if (miWrapText.isSelected()) ta.setWrapText(true);
 	}
+	
+	//for View Menu
+	@FXML public void toggleStatusBar()
+	{
+		lblStatusBar.setVisible(false);
+		if (miStatusBar.isSelected()) lblStatusBar.setVisible(true);
+	}
+	
+	
 
 	
 }

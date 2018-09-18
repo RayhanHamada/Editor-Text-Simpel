@@ -18,7 +18,7 @@
    <bottom>
       <HBox prefHeight="20.0" prefWidth="802.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblStatusBar" prefHeight="17.0" prefWidth="227.0" text="Status Bar">
+            <Label fx:id="lblStatusBar" prefHeight="17.0" prefWidth="323.0">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -60,12 +60,12 @@
                 </Menu>
                   <Menu fx:id="mFormat" mnemonicParsing="false" text="Format">
                     <items>
-                        <RadioMenuItem fx:id="miWrapText" mnemonicParsing="false" text="Wrap Text" />
+                        <RadioMenuItem fx:id="miWrapText" mnemonicParsing="false" onAction="#toggleWrapText" text="Wrap Text" />
                     </items>
                   </Menu>
                 <Menu fx:id="mView" mnemonicParsing="false" text="View">
                      <items>
-                        <RadioMenuItem fx:id="miStatusBar" mnemonicParsing="false" text="Status Bar" />
+                        <RadioMenuItem fx:id="miStatusBar" mnemonicParsing="false" onAction="#toggleStatusBar" text="Status Bar" />
                      </items>
                 </Menu>
                   <Menu fx:id="mHelp" mnemonicParsing="false" text="Help">
