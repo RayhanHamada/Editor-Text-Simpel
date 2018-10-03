@@ -1,5 +1,10 @@
 package main;
 
+/*
+ * @author RayhanHamada
+ * 
+ */
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;

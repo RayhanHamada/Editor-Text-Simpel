@@ -1,5 +1,10 @@
 package main;
 
+/*
+ * @author RayhanHamada
+ * 
+ */
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
